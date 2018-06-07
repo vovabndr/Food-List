@@ -92,7 +92,7 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         
         majorsString += "Name:\n"
         for row in rows {
-            var name = row[0]
+            let name = row[0]
             majorsString += "\(name)\n"
         }
         
