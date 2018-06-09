@@ -11,40 +11,33 @@ import GoogleSignIn
 import UIKit
 import GTMOAuth2
 
-
 class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
+    @IBOutlet weak var nameTableView: UITableView!
     
-    // If modifying these scopes, delete your previously saved credentials by
-    // resetting the iOS simulator or uninstall the app.
-    
-    private let scopes = [kGTLRAuthScopeSheetsSpreadsheetsReadonly]
+    var nameArr = [[Any]]()
+    var Sheet : [[[Any]]] = []
 
+    private let scopes = [kGTLRAuthScopeSheetsSpreadsheetsReadonly]
     private let service = GTLRSheetsService()
     
     let signInButton = GIDSignInButton()
-    let output = UITextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configure Google Sign-in.
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().scopes = scopes
         GIDSignIn.sharedInstance().signInSilently()
         
-        // Add the sign-in button.
         view.addSubview(signInButton)
         
-        // Add a UITextView to display output.
-        output.frame = view.bounds
-        output.isEditable = false
-        output.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-        output.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        output.isHidden = true
-        view.addSubview(output);
+        nameTableView.delegate = self
+        nameTableView.dataSource = self
     }
+    
+
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
@@ -53,66 +46,97 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             self.service.authorizer = nil
         } else {
             self.signInButton.isHidden = true
-            self.output.isHidden = false
             self.service.authorizer = user.authentication.fetcherAuthorizer()
-            listMajors()
+            getList()
         }
     }
     
-    // spreadsheet:
-    func listMajors() {
-        output.text = "Getting sheet data..."
-        let spreadsheetId = "1NrPDjp80_7venKB0OsIqZLrq47jbx9c-lrWILYJPS88"
-        let range = "Понедельник !A3:M"
+    func getList() {
+        let spreadsheetId = spreadSheetID
+        for day in days {
+        let range = "\(day)!A1:M34"
         let query = GTLRSheetsQuery_SpreadsheetsValuesGet
             .query(withSpreadsheetId: spreadsheetId, range:range)
-        service.executeQuery(query,
-                             delegate: self,
-                             didFinish: #selector(displayResultWithTicket(ticket:finishedWithObject:error:))
-        )
+            
+            service.executeQuery(query,delegate: self,didFinish: #selector(displayResultWithTicket))
+        }
     }
     
-    // Process the response and display output
     @objc func displayResultWithTicket(ticket: GTLRServiceTicket,
                                  finishedWithObject result : GTLRSheets_ValueRange,
                                  error : NSError?) {
-        
         if let error = error {
             showAlert(title: "Error", message: error.localizedDescription)
             return
         }
         
-        var majorsString = ""
         let rows = result.values!
-        
         if rows.isEmpty {
-            output.text = "No data found."
             return
         }
+        print(rows[1][1])
         
-        majorsString += "Name:\n"
-        for row in rows {
-            let name = row[0]
-            majorsString += "\(name)\n"
+        Sheet.append(rows)
+        nameArr = rows
+        nameTableView.reloadData()
+    }
+    
+    func buildList(index : Int)->[[Any]] {
+        var menu = [[Any]]()
+        for days in 0..<Sheet.count {
+            var dayDish = [Any]()
+            for people in 0..<Sheet[days].count where people == index {
+                for food in 0..<Sheet[days][people].count
+                    where !(Sheet[days][people][food] as! String).isEmpty &&
+                        !(Sheet[days][1][food] as! String).isEmpty  {
+                    dayDish.append(Sheet[days][1][food])
+                }
+            }
+            menu.append(dayDish)
         }
-        
-        output.text = majorsString
+        return menu
     }
     
     
-    // Helper for showing an alert
     func showAlert(title : String, message: String) {
         let alert = UIAlertController(
             title: title,
             message: message,
-            preferredStyle: UIAlertControllerStyle.alert
+            preferredStyle: .alert
         )
         let ok = UIAlertAction(
             title: "OK",
-            style: UIAlertActionStyle.default,
+            style: .default,
             handler: nil
         )
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
+    }
+    
+
+}
+
+extension ViewController : UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return nameArr.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NameCell", for: indexPath)
+        cell.textLabel?.text = nameArr[indexPath.row][0] as? String
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let controller = storyboard!.instantiateViewController(withIdentifier:
+//            "DayListViewController") as? DayListViewController
+//        controller?.foodList = buildList(index: indexPath.row) as! [[String]]
+//        navigationController!.pushViewController(controller!, animated: true)
+        
+        
+    }
+    
+    func getdata (handler: @escaping (([String])->()) ){
+        
+        
+        handler([])
     }
 }
