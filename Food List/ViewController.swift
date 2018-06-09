@@ -29,8 +29,10 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().scopes = scopes
-        GIDSignIn.sharedInstance().signInSilently()
-        
+//        GIDSignIn.sharedInstance().signInSilently()
+       
+        signInButton.frame = CGRect(x: view.frame.width/2 - 50, y: 100,
+                                    width: 100, height: 100)
         view.addSubview(signInButton)
         
         nameTableView.delegate = self
