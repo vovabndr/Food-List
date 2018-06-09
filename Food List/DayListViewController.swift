@@ -31,10 +31,11 @@ extension DayListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return days[section]
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayListCell", for: indexPath)
         cell.textLabel?.text =  foodList[indexPath.section][indexPath.row]
+
         return cell
     }
 }

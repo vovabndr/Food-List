@@ -65,6 +65,7 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     @objc func displayResultWithTicket(ticket: GTLRServiceTicket,
                                  finishedWithObject result : GTLRSheets_ValueRange,
                                  error : NSError?) {
+        
         if let error = error {
             showAlert(title: "Error", message: error.localizedDescription)
             return
@@ -75,7 +76,6 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
             return
         }
         print(rows[1][1])
-        
         Sheet.append(rows)
         nameArr = rows
         nameTableView.reloadData()
@@ -125,18 +125,16 @@ extension ViewController : UITableViewDelegate,UITableViewDataSource {
         cell.textLabel?.text = nameArr[indexPath.row][0] as? String
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let controller = storyboard!.instantiateViewController(withIdentifier:
-//            "DayListViewController") as? DayListViewController
-//        controller?.foodList = buildList(index: indexPath.row) as! [[String]]
-//        navigationController!.pushViewController(controller!, animated: true)
-        
-        
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 || indexPath.row == 1 {
+            return 0.0
+        }
+        return 45
     }
-    
-    func getdata (handler: @escaping (([String])->()) ){
-        
-        
-        handler([])
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = storyboard!.instantiateViewController(withIdentifier:
+            "DayListViewController") as? DayListViewController
+        controller?.foodList = buildList(index: indexPath.row) as! [[String]]
+        navigationController!.pushViewController(controller!, animated: true)
     }
 }
