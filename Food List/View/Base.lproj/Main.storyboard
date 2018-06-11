@@ -18,10 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="65B-og-9xo">
-                                <rect key="frame" x="0.0" y="155" width="375" height="492"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="65B-og-9xo">
+                                <rect key="frame" x="0.0" y="118" width="375" height="549"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="549" id="xt9-em-iaO"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NameCell" id="aHh-S4-YZ8">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -33,13 +35,27 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csv-nY-fNJ" customClass="GIDSignInButton">
+                                <rect key="frame" x="67" y="80" width="240" height="24"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="65B-og-9xo" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="5Qb-Fx-Pkd"/>
+                            <constraint firstItem="65B-og-9xo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="BCu-N3-uBO"/>
+                            <constraint firstItem="csv-nY-fNJ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="YIq-nl-Cci"/>
+                            <constraint firstItem="65B-og-9xo" firstAttribute="top" secondItem="csv-nY-fNJ" secondAttribute="bottom" constant="14" id="d5d-Zc-xx2"/>
+                            <constraint firstItem="65B-og-9xo" firstAttribute="centerX" secondItem="csv-nY-fNJ" secondAttribute="centerX" id="jWZ-y5-rp2"/>
+                            <constraint firstItem="csv-nY-fNJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="tUj-8J-Yj4"/>
+                            <constraint firstItem="csv-nY-fNJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="uDM-P5-kX7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Qgz-iO-xag"/>
                     <connections>
                         <outlet property="nameTableView" destination="65B-og-9xo" id="jgj-dw-qzM"/>
+                        <outlet property="signInButton" destination="csv-nY-fNJ" id="cKX-I2-Fgf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -54,9 +70,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zIg-Vg-7Cz">
-                                <rect key="frame" x="0.0" y="51" width="375" height="616"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zIg-Vg-7Cz">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DayListCell" id="YFC-qz-fEB">
@@ -71,6 +86,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zIg-Vg-7Cz" secondAttribute="trailing" id="Jx1-YY-fh0"/>
+                            <constraint firstItem="zIg-Vg-7Cz" firstAttribute="bottom" secondItem="ba2-IE-bS2" secondAttribute="bottom" id="UCX-hI-uL8"/>
+                            <constraint firstItem="zIg-Vg-7Cz" firstAttribute="top" secondItem="ba2-IE-bS2" secondAttribute="top" id="wl0-oX-jIc"/>
+                            <constraint firstItem="zIg-Vg-7Cz" firstAttribute="leading" secondItem="bLb-ot-jlO" secondAttribute="leading" id="zth-Vi-dBa"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ba2-IE-bS2"/>
                     </view>
                     <connections>

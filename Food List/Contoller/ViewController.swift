@@ -11,17 +11,17 @@ import GoogleSignIn
 import UIKit
 import GTMOAuth2
 
-class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var nameTableView: UITableView!
     
+    @IBOutlet weak var signInButton: GIDSignInButton!
     var nameArr = [[Any]]()
-    var Sheet : [[[Any]]] = []
+    var Sheet = [[[Any]]]()
 
     private let scopes = [kGTLRAuthScopeSheetsSpreadsheetsReadonly]
     private let service = GTLRSheetsService()
     
-    let signInButton = GIDSignInButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,25 +29,23 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().scopes = scopes
-//        GIDSignIn.sharedInstance().signInSilently()
-       
-        signInButton.frame = CGRect(x: view.frame.width/2 - 50, y: 100,
-                                    width: 100, height: 100)
-        view.addSubview(signInButton)
+        GIDSignIn.sharedInstance().signInSilently()
+        signInButton.style = .wide
         
         nameTableView.delegate = self
         nameTableView.dataSource = self
     }
     
 
+}
+
+extension ViewController:  GIDSignInDelegate, GIDSignInUIDelegate{
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
-        if let error = error {
-            showAlert(title: "Authentication Error", message: error.localizedDescription)
+        if (error) != nil {
             self.service.authorizer = nil
         } else {
-            self.signInButton.isHidden = true
             self.service.authorizer = user.authentication.fetcherAuthorizer()
             getList()
         }
@@ -56,28 +54,23 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     func getList() {
         let spreadsheetId = spreadSheetID
         for day in days {
-        let range = "\(day)!A1:M34"
-        let query = GTLRSheetsQuery_SpreadsheetsValuesGet
-            .query(withSpreadsheetId: spreadsheetId, range:range)
-            
+            let range = "\(day)!A1:M34"
+            let query = GTLRSheetsQuery_SpreadsheetsValuesGet
+                .query(withSpreadsheetId: spreadsheetId, range:range)
             service.executeQuery(query,delegate: self,didFinish: #selector(displayResultWithTicket))
         }
     }
     
     @objc func displayResultWithTicket(ticket: GTLRServiceTicket,
-                                 finishedWithObject result : GTLRSheets_ValueRange,
-                                 error : NSError?) {
-        
-        if let error = error {
-            showAlert(title: "Error", message: error.localizedDescription)
+                                       finishedWithObject result : GTLRSheets_ValueRange,
+                                       error : NSError?) {
+        guard error == nil else {
             return
         }
-        
         let rows = result.values!
         if rows.isEmpty {
             return
         }
-        print(rows[1][1])
         Sheet.append(rows)
         nameArr = rows
         nameTableView.reloadData()
@@ -91,31 +84,13 @@ class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
                 for food in 0..<Sheet[days][people].count
                     where !(Sheet[days][people][food] as! String).isEmpty &&
                         !(Sheet[days][1][food] as! String).isEmpty  {
-                    dayDish.append(Sheet[days][1][food])
+                            dayDish.append(Sheet[days][1][food])
                 }
             }
             menu.append(dayDish)
         }
         return menu
     }
-    
-    
-    func showAlert(title : String, message: String) {
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        let ok = UIAlertAction(
-            title: "OK",
-            style: .default,
-            handler: nil
-        )
-        alert.addAction(ok)
-        present(alert, animated: true, completion: nil)
-    }
-    
-
 }
 
 extension ViewController : UITableViewDelegate,UITableViewDataSource {

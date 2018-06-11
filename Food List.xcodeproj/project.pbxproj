@@ -12,10 +12,8 @@
 		31A6F56220C9CEEB00FA9EF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A6F56120C9CEEB00FA9EF0 /* AppDelegate.swift */; };
 		31A6F56420C9CEEB00FA9EF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A6F56320C9CEEB00FA9EF0 /* ViewController.swift */; };
 		31A6F56720C9CEEB00FA9EF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A6F56520C9CEEB00FA9EF0 /* Main.storyboard */; };
-		31A6F56A20C9CEEB00FA9EF0 /* Food_List.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31A6F56820C9CEEB00FA9EF0 /* Food_List.xcdatamodeld */; };
 		31A6F56C20C9CEEF00FA9EF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31A6F56B20C9CEEF00FA9EF0 /* Assets.xcassets */; };
 		31A6F56F20C9CEEF00FA9EF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A6F56D20C9CEEF00FA9EF0 /* LaunchScreen.storyboard */; };
-		31AE0DA420CC64E2000AB72A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AE0DA320CC64E2000AB72A /* CoreDataManager.swift */; };
 		F96C6CE999BD541CA0FAB107 /* Pods_Food_List.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFA9AF106496994E0214235 /* Pods_Food_List.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,11 +25,9 @@
 		31A6F56120C9CEEB00FA9EF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31A6F56320C9CEEB00FA9EF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		31A6F56620C9CEEB00FA9EF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		31A6F56920C9CEEB00FA9EF0 /* Food_List.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Food_List.xcdatamodel; sourceTree = "<group>"; };
 		31A6F56B20C9CEEF00FA9EF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31A6F56E20C9CEEF00FA9EF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31A6F57020C9CEEF00FA9EF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31AE0DA320CC64E2000AB72A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4F25134CB2B5D78EDE49BC57 /* Pods-Food List.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food List.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Food List/Pods-Food List.debug.xcconfig"; sourceTree = "<group>"; };
 		5BFA9AF106496994E0214235 /* Pods_Food_List.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Food_List.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -78,58 +74,32 @@
 		31A6F56020C9CEEB00FA9EF0 /* Food List */ = {
 			isa = PBXGroup;
 			children = (
-				31AE0DA120CC6437000AB72A /* Common */,
-				31AE0DA720CC65F9000AB72A /* Modules */,
 				31A6F56120C9CEEB00FA9EF0 /* AppDelegate.swift */,
-				31A6F56320C9CEEB00FA9EF0 /* ViewController.swift */,
-				3102AD1120CBEC8000BE4624 /* Constants.swift */,
-				3102AD0F20CBD46500BE4624 /* DayListViewController.swift */,
-				31A6F56520C9CEEB00FA9EF0 /* Main.storyboard */,
+				31C59DC620CE130400776547 /* Contoller */,
+				31C59DC720CE131700776547 /* View */,
 				31A6F56B20C9CEEF00FA9EF0 /* Assets.xcassets */,
+				3102AD1120CBEC8000BE4624 /* Constants.swift */,
 				31A6F56D20C9CEEF00FA9EF0 /* LaunchScreen.storyboard */,
 				31A6F57020C9CEEF00FA9EF0 /* Info.plist */,
 			);
 			path = "Food List";
 			sourceTree = "<group>";
 		};
-		31AE0DA120CC6437000AB72A /* Common */ = {
+		31C59DC620CE130400776547 /* Contoller */ = {
 			isa = PBXGroup;
 			children = (
-				31AE0DA220CC644D000AB72A /* Data Storage */,
+				31A6F56320C9CEEB00FA9EF0 /* ViewController.swift */,
+				3102AD0F20CBD46500BE4624 /* DayListViewController.swift */,
 			);
-			path = Common;
+			path = Contoller;
 			sourceTree = "<group>";
 		};
-		31AE0DA220CC644D000AB72A /* Data Storage */ = {
+		31C59DC720CE131700776547 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				31AE0DA520CC65B3000AB72A /* Entities */,
-				31AE0DA620CC65C1000AB72A /* Managed Entities */,
-				31AE0DA320CC64E2000AB72A /* CoreDataManager.swift */,
-				31A6F56820C9CEEB00FA9EF0 /* Food_List.xcdatamodeld */,
+				31A6F56520C9CEEB00FA9EF0 /* Main.storyboard */,
 			);
-			path = "Data Storage";
-			sourceTree = "<group>";
-		};
-		31AE0DA520CC65B3000AB72A /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		31AE0DA620CC65C1000AB72A /* Managed Entities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Managed Entities";
-			sourceTree = "<group>";
-		};
-		31AE0DA720CC65F9000AB72A /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modules;
+			path = View;
 			sourceTree = "<group>";
 		};
 		FF7DE12DA8E1F8D354C0C422 /* Frameworks */ = {
@@ -277,10 +247,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31AE0DA420CC64E2000AB72A /* CoreDataManager.swift in Sources */,
 				3102AD1220CBEC8000BE4624 /* Constants.swift in Sources */,
 				31A6F56420C9CEEB00FA9EF0 /* ViewController.swift in Sources */,
-				31A6F56A20C9CEEB00FA9EF0 /* Food_List.xcdatamodeld in Sources */,
 				31A6F56220C9CEEB00FA9EF0 /* AppDelegate.swift in Sources */,
 				3102AD1020CBD46500BE4624 /* DayListViewController.swift in Sources */,
 			);
@@ -482,19 +450,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		31A6F56820C9CEEB00FA9EF0 /* Food_List.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				31A6F56920C9CEEB00FA9EF0 /* Food_List.xcdatamodel */,
-			);
-			currentVersion = 31A6F56920C9CEEB00FA9EF0 /* Food_List.xcdatamodel */;
-			path = Food_List.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 31A6F55620C9CEEB00FA9EF0 /* Project object */;
 }
